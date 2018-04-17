@@ -1,0 +1,58 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Sector {
+
+	private int idSector;
+	private ArrayList<Empleado> empleados;
+	private float presupuesto;
+	
+	
+	public Sector(int valor1)
+	{
+		idSector = valor1;
+		empleados = new ArrayList<Empleado>();
+	}
+	
+	
+	public float informarPresupuesto()
+	{
+		int i,sumador=0;
+		for(i=0;i<empleados.size();i++)
+		{
+			sumador+=empleados.get(i).devolverSueldo();
+		}
+		
+		return sumador;
+		
+	}
+	
+	
+	public void mostrarPresupuestos()
+	{
+		float sueldosEmpleados=this.informarPresupuesto();
+		
+		if(sueldosEmpleados>presupuesto)
+		{
+			System.out.println("SECTOR: "+this.idSector+" PRESUPUESTO: "+this.presupuesto+" SUELDO TOTAL DE EMPLEADOS: "+sueldosEmpleados);
+		}
+
+	}
+	
+	public void removerEmpleadoSector(Empleado e)
+	{
+		empleados.remove(e);
+	}
+	
+	public void insertarEmpleadoSector(Empleado e)
+	{
+		empleados.add(e);
+	}
+	
+	public int devolverId()
+	{
+		return idSector;
+	}
+		
+	
+}

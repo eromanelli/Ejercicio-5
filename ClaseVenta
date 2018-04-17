@@ -1,0 +1,20 @@
+
+public class Venta {
+
+	private String localidad;
+	private Empleado empleado;
+	
+	
+	public Venta(String str1)
+	{
+		localidad = str1;
+	}
+	
+	
+	
+	public String devolverLocalidad()
+	{
+		return localidad;
+	}
+	
+}

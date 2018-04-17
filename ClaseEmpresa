@@ -1,0 +1,146 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Empresa {
+	
+	private int cuit;
+	private String razonSocial;
+	private ArrayList<Empleado> empleados;
+	private ArrayList<Sector> sectores;
+	private ArrayList<Venta> ventas;
+	
+	public Empresa()
+	{
+		Scanner entrada = new Scanner(System.in);
+	
+		System.out.print("INGRESE CUIT: ");
+		cuit = entrada.nextInt();
+		System.out.print("INGRESE RAZON SOCIAL: ");
+		razonSocial = entrada.next();
+		empleados = new ArrayList<Empleado>();
+		sectores = new ArrayList<Sector>();
+		ventas = new ArrayList<Venta>();
+	}
+	
+	// PUNTO 1 
+	
+	public void agregarEmpleado()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.print("INGRESE LEGAJO DEL EMPLEADO: ");
+		int legajo = entrada.nextInt();
+		System.out.print("INGRESE DNI DEL EMPLEADO: ");
+		int dni = entrada.nextInt();
+		System.out.print("INGRESE NOMBRE Y APELLIDO: ");
+		String nombreA = entrada.next();
+		System.out.print("INGRESE SUELDO: ");
+		float sueldo = entrada.nextFloat();
+		
+		Empleado e = new Empleado(legajo,dni,nombreA,sueldo);
+		
+	}
+	
+	// PUNTO 2
+	
+	public void mostrarPresupuestoSectores()
+	{
+		int i;
+		for(i=0;i<sectores.size();i++)
+		{
+			sectores.get(i).mostrarPresupuestos();
+		}
+	}
+	
+	// PUNTO 3 
+	
+	public void agregarVentaEmpleado(int valor)
+	{
+		Empleado e = buscarEmpleado(valor);
+		e.agregarVenta();
+	}
+	
+	// PUNTO 4
+	
+	public void transferirEmpleadoSector(int legajo, int sectorOrigen, int sectorDestino)
+	{
+		// VERIFICO QUE EXISTAN EL EMPLEADO Y LOS SECTORES
+		Empleado e = buscarEmpleado(legajo);
+		Sector origen = buscarSector(sectorOrigen);
+		Sector destino = buscarSector(sectorDestino);
+		
+		// REMUEVO DE ORIGEN E INSERTO EN DESTINO
+		origen.removerEmpleadoSector(e);
+		destino.insertarEmpleadoSector(e);
+		
+	}
+	
+	// PUNTO 5
+	
+	public void liquidarSueldos()
+	{
+		
+		int i;
+		float sueldo;
+		for(i=0;i<empleados.size();i++)
+		{
+			sueldo = empleados.get(i).calcularSueldo();
+			System.out.println("EMPLEADO: "+empleados.get(i).devolverNombreApellido()+" SUELDO: "+empleados.get(i).calcularSueldo());
+		}
+		
+	}
+	
+	// PUNTO 6
+	
+	public void informarVentasBuenosAires()
+	{
+		int i,cant=0;
+		
+		for(i=0;i<ventas.size();i++)
+		{
+			if(ventas.get(i).devolverLocalidad()=="Buenos Aires")
+			{
+				cant++;
+			}
+		}
+		
+		System.out.println("VENTAS EN BUENOS AIRES: "+cant);
+		
+	}
+	
+	// AUXILIAR
+	
+	public Empleado buscarEmpleado(int valor)
+	{
+		int i=0;
+		while((i<empleados.size()) && empleados.get(i).devolverDni()!=valor)
+		{
+			i++;
+		}
+			if(i==empleados.size())
+			{
+				return null;
+			}
+			else
+				return empleados.get(i);
+	}
+	
+	public Sector buscarSector(int id)
+	{
+		int i=0;
+		while((i<sectores.size()) && sectores.get(i).devolverId()!=id)
+		{
+			i++;
+		}
+		if(i==sectores.size())
+		{
+			return null;
+		}
+		else
+		
+			return sectores.get(i);
+		
+	}
+	
+	
+	
+}

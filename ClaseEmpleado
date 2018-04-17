@@ -1,0 +1,63 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Empleado {
+
+	private int legajo;
+	private int dni;
+	private String nombreApellido;
+	private Sector sector;
+	private float sueldo;
+	private ArrayList<Venta> ventas;
+	
+	
+	
+	public Empleado(int valor0,int valor1, String str1, float valor2)
+	{
+		legajo = valor0;
+		dni = valor1;
+		nombreApellido = str1;
+		sueldo = valor2;
+		sector = null;
+		ventas = new ArrayList<Venta>();
+	}
+	
+	
+	public float devolverSueldo()
+	{
+		return sueldo;
+	}
+	
+	public void agregarVenta()
+	{
+		Scanner entrada = new Scanner (System.in);
+		System.out.println("INGRESE LOCALIDAD DE VENTA: ");
+		String localidad = entrada.next();
+		Venta venta = new Venta(localidad);
+		ventas.add(venta);
+		
+	}
+	
+	public int devolverDni()
+	{
+		return dni;
+	}
+	
+	public float calcularSueldo()
+	{
+		float sueldo;
+		sueldo = (this.sueldo+(contarVentas()*200));
+		return sueldo;
+	}
+	
+	public int contarVentas()
+	{
+		int cantVentas = ventas.size();
+		return cantVentas;
+	}
+	
+	public String devolverNombreApellido()
+	{
+		return nombreApellido;
+	}
+}

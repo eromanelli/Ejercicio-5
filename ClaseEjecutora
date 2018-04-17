@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Ejecutora {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Empresa e = new Empresa();
+		int respuesta;
+		
+		Scanner entrada = new Scanner (System.in);
+		do
+		{
+			System.out.println("MENU DE OPCIONES. 1=Agregar un empleado nuevo a la empresa sin asignarlo a ningún sector "
+					+ "2=Informar el / los sectores donde el sueldo de sus empleados sobrepase el presupuesto asignado "
+					+ "3=Agregar una venta hecha por un empleado "
+					+ "4=Dado el legajo de un empleado, el número de un sector de origen "
+					+ "y el número de un sector de destino, cambiar al empleado del sector de origen al de destino "
+					+ "5=Liquidar el sueldo de todos los empleados "
+					+ "6=Informar la cantidad de ventas hechas correspondientes a personas viviendo en la Ciudad Autónoma de Bs. As ");
+			respuesta = entrada.nextInt();
+			
+			switch(respuesta)
+			 {
+				case 1: e.agregarEmpleado();
+				break;
+			
+				case 2: e.mostrarPresupuestoSectores();
+				break;
+			
+				case 3: System.out.println("INGRESE UN DNI DE EMPLEADO: ");
+						int valor = entrada.nextInt();
+					    e.agregarVentaEmpleado(valor);
+					    break;
+				
+				case 4: System.out.print("INGRESE UN LEGAJO: ");
+						int legajo = entrada.nextInt();
+						System.out.println("INGRESE UN SECTOR DE ORIGEN: ");
+						int origen = entrada.nextInt();
+						System.out.println("INGRESE UN SECTOR DE DESTINO: ");
+						int destino = entrada.nextInt();
+						
+						e.transferirEmpleadoSector(legajo, origen, destino);
+				break;
+				
+				case 5: e.liquidarSueldos();
+				break;
+				
+				case 6: e.informarVentasBuenosAires();
+				break;	
+ 
+			}
+		
+		}while(respuesta!=0);
+		
+	}
+
+}
